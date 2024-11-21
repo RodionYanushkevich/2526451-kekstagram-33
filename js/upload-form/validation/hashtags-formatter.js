@@ -9,7 +9,6 @@ function hashtagsFormatter(hashtTagsArray) {
     }
   }
 
-
   for (let i = 0; i < hashtTagsArray.length; i++) {
     let newHashtag = ((hashtTagsArray[i].replace(/#/g, ' #'))).trim();
 

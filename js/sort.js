@@ -50,10 +50,6 @@ const deboucedGeneratePictures = debounce((array) => {
 function showDeafaultPictures(evt) {
   buttonsActiveClassToggle(evt);
 
-  // photoDataPromise.then((photoData) => {
-
-  //   deboucedGeneratePictures(photoData);
-  // });
   deboucedGeneratePictures(photoDataArray);
 }
 
