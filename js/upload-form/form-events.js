@@ -7,8 +7,6 @@ import {defaultImgScaleValues} from'./scale-handler.js';
 
 import {setUserFormSubmit} from'./form.js';
 
-
-// const uploadFile = document.querySelector('.img-upload__input');
 const uploadOverlay = document.querySelector('.img-upload__overlay');
 const overlayCloseButton = uploadOverlay.querySelector('.img-upload__cancel');
 
@@ -23,11 +21,11 @@ const onDocumentKeydown = (evt) => {
 };
 
 function openModalWindow () {
-  // evt.preventDefault();
   compensateOverflowPadding(true);
-  uploadOverlay.classList.remove('hidden');
 
+  uploadOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
+
   removeListner();
   document.addEventListener('keydown', onDocumentKeydown);
   createSlider();
@@ -46,10 +44,8 @@ function closeModalWindow () {
   defaultSliderValue();
 }
 
-// сеттер ...
 setUserFormSubmit(closeModalWindow);
 
-// uploadFile.addEventListener('click', openModalWindow);
 overlayCloseButton.addEventListener('click', closeModalWindow) ;
 
 export {onDocumentKeydown,openModalWindow};

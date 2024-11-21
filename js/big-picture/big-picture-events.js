@@ -40,9 +40,13 @@ function openBigPictureWindow () {
 
 function closeBigPictureWindow () {
   compensateOverflowPadding(false);
+
   bigPictureWindow.classList.add('hidden');
-  document.removeEventListener('keydown', onDocumentKeydown);
   document.body.classList.remove('modal-open');
+
+  document.removeEventListener('keydown', onDocumentKeydown);
+  commentsLoader.removeEventListener ('click', showNextComments);
+
 }
 
 function hideCommentsLoader (commentsList) {
@@ -55,7 +59,6 @@ function hideCommentsLoader (commentsList) {
 
 function removeListner () {
   pictures.removeEventListener('click', onPictureClick);
-  pictures.removeEventListener('click', hideCommentsOnLoadBigPicture);
 }
 
 function addListner () {
@@ -90,4 +93,4 @@ function onPictureClick (evt) {
 bigPictureWindowCloseBtn.addEventListener('click', closeBigPictureWindow);
 pictures.addEventListener('click', onPictureClick);
 
-export {getCommentsList, commentsLoader, commentShownCount,removeListner,addListner};
+export {getCommentsList, commentsLoader, commentShownCount, removeListner, addListner};

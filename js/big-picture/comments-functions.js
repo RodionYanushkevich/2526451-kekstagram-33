@@ -16,7 +16,6 @@ function hideCommentsOnLoadBigPicture(commentsList) {
 }
 
 function getCommentShownCount (commentsList) {
-
   if (commentsList.length < displayedCommentsCount) {
     commentShownCount.textContent = commentsList.length;
   } else {
