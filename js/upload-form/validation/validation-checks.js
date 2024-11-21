@@ -3,7 +3,7 @@ const MAX_HASHTAGS = 5;
 const hashtagsRegular = /^#[a-zа-я0-9]{1,19}$/i;
 
 let errorMesage = [ ];
-
+// some
 function hasDuplicateHashtags(hashtagsArray) {
   const noDuplicate = {};
   for (let i = 0; i < hashtagsArray.length; i++) {

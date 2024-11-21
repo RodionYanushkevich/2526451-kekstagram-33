@@ -2,12 +2,11 @@ import { isEscapeKey,compensateOverflowPadding } from '../util.js';
 import {pictures} from '../generate-pictures.js';
 
 import {generateComments } from './generate-comments-template.js';
-import { hideCommentsOnLoadBigPicture,showNextComments , getCommentShownCount} from './comments-functions.js';
+import { hideCommentsOnLoadBigPicture,showNextComments , getCommentShownCount, INITIAL_COMMENTS_TO_SHOW} from './comments-functions.js';
 
 
 const bigPictureWindow = document.querySelector('.big-picture');
 const commentShownCount = bigPictureWindow.querySelector('.social__comment-shown-count');
-
 
 const bigPictureWindowCloseBtn = bigPictureWindow.querySelector('.big-picture__cancel');
 const bigPictureImage = bigPictureWindow.querySelector('.big-picture__img').children[0];
@@ -25,7 +24,7 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
-function getCommentsList (){
+function getCommentsList () {
   return bigPictureWindow.querySelectorAll('.social__comment');
 }
 
@@ -46,30 +45,32 @@ function closeBigPictureWindow () {
   document.body.classList.remove('modal-open');
 }
 
-function hideCommentsLoader () {
-  const commentsList = getCommentsList();
-  if (commentsList.length <= 5) {
+function hideCommentsLoader (commentsList) {
+  if (commentsList.length <= INITIAL_COMMENTS_TO_SHOW) {
     commentsLoader.classList.add('hidden');
   } else if (commentsLoader.classList.contains('hidden')) {
     commentsLoader.classList.remove('hidden');
   }
 }
+
 function removeListner () {
   pictures.removeEventListener('click', onPictureClick);
   pictures.removeEventListener('click', hideCommentsOnLoadBigPicture);
 }
+
 function addListner () {
   pictures.addEventListener('click', onPictureClick);
 }
 
 function onPictureClick (evt) {
-
   if (evt.target.nodeName === 'IMG') {
     const target = evt.target.parentElement;
     const [targetImage, { children: [newComentsCount, newLikesCount] }] = target.children;
 
     generateComments(targetImage.src);
-    hideCommentsOnLoadBigPicture();
+    const commentsList = getCommentsList ();
+
+    hideCommentsOnLoadBigPicture(commentsList);
 
     openBigPictureWindow();
 
@@ -81,8 +82,8 @@ function onPictureClick (evt) {
     likesCount.textContent = newLikesCount.textContent;
     pictureDescription.textContent = targetImage.alt;
 
-    getCommentShownCount();
-    hideCommentsLoader();
+    getCommentShownCount(commentsList);
+    hideCommentsLoader(commentsList);
   }
 }
 

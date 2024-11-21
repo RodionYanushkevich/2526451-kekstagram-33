@@ -56,7 +56,6 @@ effectsContainer.addEventListener('change', (evt) => {
   }
   previewImage.style.filter = EFFECTS[effectTarget].effect(EFFECTS[effectTarget].range.max);
 
-
   function sliderUpdate() {
     sliderToValue(effectTarget);
   }
@@ -66,17 +65,12 @@ effectsContainer.addEventListener('change', (evt) => {
     start: EFFECTS[effectTarget].range.max,
     step: (effectTarget !== 'marvin') ? DEFAULT_STEP : EFFECTS[effectTarget].step,
   });
-
   slider.noUiSlider.on('update', sliderUpdate);
 });
 
 function destroySlider() {
-  // if (slider.noUiSlider) {
-  // console.log(slider.noUiSlider);
   slider.noUiSlider.destroy();
-  // }
 }
-
 
 function defaultSliderValue (){
   destroySlider();

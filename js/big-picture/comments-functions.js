@@ -1,12 +1,13 @@
 
 import {commentsLoader, getCommentsList, commentShownCount} from './big-picture-events.js';
-
+const COMMENTS_TO_SHOW = 5;
 const INITIAL_COMMENTS_TO_SHOW = 5;
+
 let displayedCommentsCount = INITIAL_COMMENTS_TO_SHOW;
 
-function hideCommentsOnLoadBigPicture() {
+function hideCommentsOnLoadBigPicture(commentsList) {
   displayedCommentsCount = INITIAL_COMMENTS_TO_SHOW;
-  const commentsList = getCommentsList();
+
   commentsList.forEach ((comment, index) => {
     if (index >= INITIAL_COMMENTS_TO_SHOW) {
       comment.classList.add('hidden');
@@ -14,8 +15,8 @@ function hideCommentsOnLoadBigPicture() {
   });
 }
 
-function getCommentShownCount () {
-  const commentsList = getCommentsList();
+function getCommentShownCount (commentsList) {
+
   if (commentsList.length < displayedCommentsCount) {
     commentShownCount.textContent = commentsList.length;
   } else {
@@ -25,7 +26,7 @@ function getCommentShownCount () {
 
 function showNextComments () {
   const commentsList = getCommentsList();
-  const COMMENTS_TO_SHOW = 5;
+
 
   if (displayedCommentsCount < commentsList.length) {
     for (let i = displayedCommentsCount; i < displayedCommentsCount + COMMENTS_TO_SHOW && i < commentsList.length ; i++) {
@@ -41,4 +42,4 @@ function showNextComments () {
     displayedCommentsCount = INITIAL_COMMENTS_TO_SHOW;
   }
 }
-export {hideCommentsOnLoadBigPicture, showNextComments , getCommentShownCount};
+export {hideCommentsOnLoadBigPicture, showNextComments , getCommentShownCount,INITIAL_COMMENTS_TO_SHOW};
