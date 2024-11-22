@@ -3,7 +3,7 @@ const MAX_HASHTAGS = 5;
 const hashtagsRegular = /^#[a-zа-я0-9]{1,19}$/i;
 
 let errorMesage = [ ];
-// some
+
 function hasDuplicateHashtags(hashtagsArray) {
   const noDuplicate = {};
   for (let i = 0; i < hashtagsArray.length; i++) {
@@ -34,13 +34,13 @@ function validateHashtagsInput(value) {
     const noDuplicateHashtags = hasDuplicateHashtags(hashtagsArray);
     const maxHashtagsValid = hashtagsArray.length <= MAX_HASHTAGS;
 
-    const hashtagsValidationArray = [
+    const hashtagsValidationErrorsObj = [
       { isValid: allHashtagsRegularValid, message: 'введён невалидный хэштег' },
       { isValid: noDuplicateHashtags, message: 'хэштеги повторяются' },
       { isValid: maxHashtagsValid, message: 'превышено количество хэштегов' }
     ];
 
-    hashtagsValidationArray.forEach(({isValid, message})=>{
+    hashtagsValidationErrorsObj.forEach(({isValid, message})=>{
       if (!isValid) {
         errorMesage.push(message);
       }

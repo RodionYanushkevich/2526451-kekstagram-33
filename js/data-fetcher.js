@@ -9,13 +9,12 @@ const photoDataPromise = fetch(`${SERVER_URL}/data`,
   {
     method:'GET'
   }
-)
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error(`Ошибка сети: ${response.status}`);
-    }
-    return response.json();
-  });
+).then((response) => {
+  if (!response.ok) {
+    throw new Error(`Ошибка сети: ${response.status}`);
+  }
+  return response.json();
+});
 
 let photoDataArray;
 

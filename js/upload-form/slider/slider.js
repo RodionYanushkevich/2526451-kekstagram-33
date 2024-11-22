@@ -10,6 +10,7 @@ const effectsContainer = uploadForm.querySelector('.img-upload__effects');
 const uploadPreview = uploadForm.querySelector('.img-upload__preview');
 
 const [previewImage] = uploadPreview.children;
+
 const DEFAULT_STEP = 0.1;
 
 function createSlider() {
@@ -68,12 +69,8 @@ effectsContainer.addEventListener('change', (evt) => {
   slider.noUiSlider.on('update', sliderUpdate);
 });
 
-function destroySlider() {
-  slider.noUiSlider.destroy();
-}
-
 function defaultSliderValue (){
-  destroySlider();
+  slider.noUiSlider.destroy();
   previewImage.style.removeProperty('filter');
   uploadForm.querySelector('#effect-none').checked = true;
 }
