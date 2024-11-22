@@ -50,5 +50,4 @@ function validateHashtagsInput(value) {
   return true;
 }
 
-
 export {validateHashtagsInput, getErrorsMessages,cleanErrorsMessages};

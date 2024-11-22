@@ -27,7 +27,6 @@ photoDataPromise
   })
   .catch(showErrorModal);
 
-
 function sendData (onSuccess, onFail, body){
   fetch(SERVER_URL,
     {
@@ -46,7 +45,6 @@ function sendData (onSuccess, onFail, body){
 
 }
 
-
 function showErrorModal() {
   const errorModal = errorTemplate.cloneNode(true);
   const errorModalSection = errorModal.children[0];
@@ -57,4 +55,3 @@ function showErrorModal() {
   }, TIMEOUT_DELETE_ERROR_SECTION);
 }
 export {photoDataPromise,sendData, photoDataArray};
-

@@ -8,7 +8,6 @@ function closeAllertModal() {
   if (!document.body.lastChild.classList.contains('success')) {
     document.addEventListener('keydown', onDocumentKeydown);
   }
-
   document.body.lastChild.remove();
 }
 
@@ -32,7 +31,6 @@ function getWindow(sentDataStatus) {
       closeAllertModal();
     }
   });
-
   return allertSection;
 }
 

@@ -36,12 +36,10 @@ function createSlider() {
   });
 }
 
-
 function sliderToValue (target){
   sliderValue.value = slider.noUiSlider.get();
   previewImage.style.filter = EFFECTS[target].effect(sliderValue.value);
 }
-
 
 effectsContainer.addEventListener('change', (evt) => {
   const effectTarget = evt.target.value;

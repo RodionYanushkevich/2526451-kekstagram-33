@@ -36,8 +36,7 @@ function blockEscKeyDownEvent () {
 
 function blockSubmitBtn () {
   submitBtn.disabled = true;
-  // замути таймаут позже
-  submitBtn.textContent = 'Отправка...';
+  submitBtn.textContent = 'Публикуем...';
 }
 
 function unblockSubmitBtn () {
@@ -59,19 +58,16 @@ function setUserFormSubmit (closeModalWindow) {
     if (isValid) {
       blockSubmitBtn();
       sendData(
-        // onSuccess
         () => {
           showErrorSuccessModal('#success');
           unblockSubmitBtn();
           pristine.reset();
           closeModalWindow();
         },
-        // fail
         () => {
           showErrorSuccessModal('#error');
           unblockSubmitBtn();
         },
-        // body
         new FormData(evt.target)
       );
     } else {

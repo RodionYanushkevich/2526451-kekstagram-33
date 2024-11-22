@@ -18,7 +18,6 @@ function buttonsActiveClassToggle(evt) {
   });
 }
 
-//алгоритм Фишера-Йетса..
 function shuffle(array) {
   const shuffledArray = array.slice();
   for (let i = array.length - 1; i > 0; i--) {
