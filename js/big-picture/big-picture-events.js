@@ -15,11 +15,15 @@ const commentsTotalCount = bigPictureWindow.querySelector('.social__comment-tota
 
 const pictureDescription = bigPictureWindow.querySelector('.social__caption');
 
+const commentInput = bigPictureWindow.querySelector('.social__footer-text');
 const commentsLoader = bigPictureWindow.querySelector('.comments-loader');
 
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
+    if (document.activeElement === commentInput) {
+      return;
+    }
     closeBigPictureWindow();
   }
 };
@@ -46,6 +50,8 @@ function closeBigPictureWindow () {
 
   document.removeEventListener('keydown', onDocumentKeydown);
   commentsLoader.removeEventListener ('click', showNextComments);
+
+  commentInput.value = '';
 
 }
 
