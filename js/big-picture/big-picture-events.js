@@ -21,12 +21,16 @@ const commentsLoader = bigPictureWindow.querySelector('.comments-loader');
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    if (document.activeElement === commentInput) {
-      return;
-    }
     closeBigPictureWindow();
   }
 };
+function blockBigPictureEscEvent (evt){
+  if (isEscapeKey(evt)) {
+    evt.target.blur();
+    evt.stopPropagation();
+  }
+}
+
 
 function getCommentsList () {
   return bigPictureWindow.querySelectorAll('.social__comment');
@@ -39,6 +43,7 @@ function openBigPictureWindow () {
   document.body.classList.add('modal-open');
 
   document.addEventListener('keydown', onDocumentKeydown);
+  commentInput.addEventListener('keydown',blockBigPictureEscEvent);
   commentsLoader.addEventListener ('click', showNextComments);
 }
 
@@ -50,6 +55,8 @@ function closeBigPictureWindow () {
 
   document.removeEventListener('keydown', onDocumentKeydown);
   commentsLoader.removeEventListener ('click', showNextComments);
+  commentInput.removeEventListener('keydown',blockBigPictureEscEvent);
+
 
   commentInput.value = '';
 
@@ -72,8 +79,11 @@ function addListner () {
 }
 
 function onPictureClick (evt) {
-  if (evt.target.nodeName === 'IMG') {
+
+  console.log(evt.target.nodeName);
+  if (evt.target.nodeName === 'IMG' || evt.target.nodeName === 'SPAN') {
     const target = evt.target.parentElement;
+
     const [targetImage, { children: [newComentsCount, newLikesCount] }] = target.children;
 
     generateComments(targetImage.src);

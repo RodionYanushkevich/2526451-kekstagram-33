@@ -2,7 +2,6 @@ import {sendData} from'../data-fetcher.js';
 import {validateHashtagsInput,getErrorsMessages,cleanErrorsMessages} from'./validation/validation-checks.js';
 import {showErrorSuccessModal} from'./error-success-modal.js';
 import { fileChooser } from './file-chooser.js';
-// переименнуй все красиво
 const uploadForm = document.querySelector('.img-upload__form');
 
 
@@ -29,9 +28,11 @@ function defaultFormValues () {
   fileChooser.value = '';
 }
 
-function blockEscKeyDownEvent () {
-  const isActive = document.activeElement === hashtagsInput || document.activeElement === commentsTextarea;
-  return isActive;
+function stopEscKeyDownEvent (evt) {
+  if (evt.target === hashtagsInput || evt.target === commentsTextarea) {
+    evt.target.blur();
+    evt.stopPropagation();
+  }
 }
 
 function blockSubmitBtn () {
@@ -81,4 +82,4 @@ function setUserFormSubmit (closeModalWindow) {
 
 }
 
-export {defaultFormValues, setUserFormSubmit, uploadForm, blockEscKeyDownEvent, hashtagsInput};
+export {defaultFormValues, setUserFormSubmit, uploadForm, stopEscKeyDownEvent, hashtagsInput};

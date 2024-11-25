@@ -3,9 +3,9 @@ const sortMenu = document.querySelector('.img-filters');
 
 const errorTemplate = document.querySelector('#data-error').content;
 const TIMEOUT_DELETE_ERROR_SECTION = 5000;
-const SERVER_URL = 'https://32.javascript.htmlacademy.pro/kekstagram';
+const SERVER_URL = 'https://32.javascript.htmlacademy.pro/kekstagram/';
 
-const photoDataPromise = fetch(`${SERVER_URL}/data`,
+const photoDataPromise = fetch(`${SERVER_URL}data`,
   {
     method:'GET'
   }
@@ -28,7 +28,7 @@ photoDataPromise
   .catch(showErrorModal);
 
 function sendData (onSuccess, onFail, body){
-  fetch(SERVER_URL,
+  fetch('https://32.javascript.htmlacademy.pro/kekstagram',
     {
       method:'POST',
       body,
