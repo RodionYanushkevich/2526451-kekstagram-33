@@ -1,5 +1,5 @@
 const pictureTemplate = document.querySelector('#picture').content;
-const pictures = document.querySelector('.pictures');
+const picturesSection = document.querySelector('.pictures');
 
 const pictureContainer = document.createDocumentFragment();
 
@@ -16,7 +16,7 @@ function generatePictures (photoDataArray) {
     comments.textContent = picture.comments.length;
     pictureContainer.appendChild(newPicture);
   });
-  pictures.appendChild(pictureContainer);
+  picturesSection.appendChild(pictureContainer);
 }
 
-export {pictures,generatePictures};
+export {picturesSection,generatePictures};

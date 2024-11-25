@@ -1,5 +1,5 @@
 import {photoDataArray} from'./data-fetcher.js';
-import {generatePictures,pictures} from'./generate-pictures.js';
+import {generatePictures,picturesSection} from'./generate-pictures.js';
 
 
 const formFilter = document.querySelector('.img-filters__form');
@@ -41,7 +41,7 @@ function debounce (callback, timeoutDelay = 500) {
 }
 
 const deboucedGeneratePictures = debounce((array) => {
-  const picturesImg = pictures.querySelectorAll('.picture');
+  const picturesImg = picturesSection.querySelectorAll('.picture');
   picturesImg.forEach((picture) => picture.remove());
   generatePictures(array);
 });

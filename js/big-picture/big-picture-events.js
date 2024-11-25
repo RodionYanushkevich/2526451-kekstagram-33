@@ -1,5 +1,5 @@
 import { isEscapeKey,compensateOverflowPadding } from '../util.js';
-import {pictures} from '../generate-pictures.js';
+import {picturesSection} from '../generate-pictures.js';
 
 import {generateComments } from './generate-comments-template.js';
 import { hideCommentsOnLoadBigPicture,showNextComments , getCommentShownCount, INITIAL_COMMENTS_TO_SHOW} from './comments-functions.js';
@@ -15,8 +15,8 @@ const commentsTotalCount = bigPictureWindow.querySelector('.social__comment-tota
 
 const pictureDescription = bigPictureWindow.querySelector('.social__caption');
 
-const commentInput = bigPictureWindow.querySelector('.social__footer-text');
 const commentsLoader = bigPictureWindow.querySelector('.comments-loader');
+const commentInput = bigPictureWindow.querySelector('.social__footer-text');
 
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -57,9 +57,7 @@ function closeBigPictureWindow () {
   commentsLoader.removeEventListener ('click', showNextComments);
   commentInput.removeEventListener('keydown',blockBigPictureEscEvent);
 
-
   commentInput.value = '';
-
 }
 
 function hideCommentsLoader (commentsList) {
@@ -71,17 +69,15 @@ function hideCommentsLoader (commentsList) {
 }
 
 function removeListner () {
-  pictures.removeEventListener('click', onPictureClick);
+  picturesSection.removeEventListener('click', onPictureClick);
 }
 
 function addListner () {
-  pictures.addEventListener('click', onPictureClick);
+  picturesSection.addEventListener('click', onPictureClick);
 }
 
 function onPictureClick (evt) {
-
-  console.log(evt.target.nodeName);
-  if (evt.target.nodeName === 'IMG' || evt.target.nodeName === 'SPAN') {
+  if (evt.target.nodeName === 'IMG') {
     const target = evt.target.parentElement;
 
     const [targetImage, { children: [newComentsCount, newLikesCount] }] = target.children;
@@ -107,6 +103,6 @@ function onPictureClick (evt) {
 }
 
 bigPictureWindowCloseBtn.addEventListener('click', closeBigPictureWindow);
-pictures.addEventListener('click', onPictureClick);
+picturesSection.addEventListener('click', onPictureClick);
 
 export {getCommentsList, commentsLoader, commentShownCount, removeListner, addListner};

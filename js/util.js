@@ -10,4 +10,4 @@ function compensateOverflowPadding(modalShown) {
   }
 }
 
-export { isEscapeKey, compensateOverflowPadding};
+export { isEscapeKey, compensateOverflowPadding };

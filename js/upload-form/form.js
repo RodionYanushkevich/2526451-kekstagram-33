@@ -1,4 +1,5 @@
 import {sendData} from'../data-fetcher.js';
+
 import {validateHashtagsInput,getErrorsMessages,cleanErrorsMessages} from'./validation/validation-checks.js';
 import {showErrorSuccessModal} from'./error-success-modal.js';
 import { fileChooser } from './file-chooser.js';
@@ -28,12 +29,6 @@ function defaultFormValues () {
   fileChooser.value = '';
 }
 
-function stopEscKeyDownEvent (evt) {
-  if (evt.target === hashtagsInput || evt.target === commentsTextarea) {
-    evt.target.blur();
-    evt.stopPropagation();
-  }
-}
 
 function blockSubmitBtn () {
   submitBtn.disabled = true;
@@ -82,4 +77,4 @@ function setUserFormSubmit (closeModalWindow) {
 
 }
 
-export {defaultFormValues, setUserFormSubmit, uploadForm, stopEscKeyDownEvent, hashtagsInput};
+export {defaultFormValues, setUserFormSubmit, uploadForm, hashtagsInput,commentsTextarea};
