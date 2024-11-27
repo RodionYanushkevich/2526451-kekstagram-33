@@ -1,12 +1,11 @@
+const RANDOM_PICTURES_COUNT = 10;
+
 import {photoDataArray} from'./data-fetcher.js';
 import {generatePictures,picturesSection} from'./generate-pictures.js';
 
-
 const formFilter = document.querySelector('.img-filters__form');
+
 const [deffaultBtn, randomBtn, popularBtn] = formFilter.children;
-
-const RANDOM_PICTURES_COUNT = 10;
-
 
 function buttonsActiveClassToggle(evt) {
   [...formFilter.children].forEach((button) => {
@@ -27,7 +26,7 @@ function shuffle(array) {
   return shuffledArray.slice(0,RANDOM_PICTURES_COUNT);
 }
 
-function comparePopular (a,b) {
+function sortByCommentCount (a,b) {
   return b.comments.length - a.comments.length;
 }
 
@@ -54,11 +53,10 @@ function showDeafaultPictures(evt) {
 
 function showPopularPictures(evt) {
   buttonsActiveClassToggle(evt);
-  const mostPopularArray = photoDataArray.slice();
+  const mostPopularItems = photoDataArray.slice();
 
-  deboucedGeneratePictures(mostPopularArray.sort(comparePopular));
+  deboucedGeneratePictures(mostPopularItems.sort(sortByCommentCount));
 }
-
 
 function showRandomPictures(evt) {
   buttonsActiveClassToggle(evt);

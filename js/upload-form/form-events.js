@@ -2,7 +2,7 @@ import {isEscapeKey, compensateOverflowPadding} from '../util.js';
 import {addListner,removeListner} from '../big-picture/big-picture-events.js';
 
 import { createSlider,defaultSliderValue } from './slider/slider.js';
-import {defaultImgScaleValues} from'./scale-handler.js';
+import { setDefaultScaleValue } from'./scale-handler.js';
 
 import {setUserFormSubmit, uploadForm,defaultFormValues} from'./form.js';
 
@@ -35,6 +35,8 @@ function openModalWindow () {
   document.addEventListener('keydown', onDocumentKeydown);
   inpustArea.addEventListener('keydown', stopFormEscKeyDownEvent);
   createSlider();
+  setDefaultScaleValue();
+
 }
 
 function closeModalWindow () {
@@ -47,7 +49,6 @@ function closeModalWindow () {
   inpustArea.removeEventListener('keydown', stopFormEscKeyDownEvent);
 
   addListner();
-  defaultImgScaleValues();
   defaultFormValues();
   defaultSliderValue();
 }

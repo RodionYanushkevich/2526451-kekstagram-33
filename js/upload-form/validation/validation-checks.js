@@ -1,8 +1,8 @@
 const MAX_HASHTAGS = 5;
 
-const hashtagsRegular = /^#[a-zа-я0-9]{1,19}$/i;
+const HASHTAG_REGEX = /^#[a-zа-я0-9]{1,19}$/i;
 
-let errorMesage = [ ];
+let errorMesages = [ ];
 
 function hasDuplicateHashtags(hashtagsArray) {
   const noDuplicate = {};
@@ -18,19 +18,19 @@ function hasDuplicateHashtags(hashtagsArray) {
 }
 
 function getErrorsMessages (){
-  return errorMesage.join(', ');
+  return errorMesages.join(', ');
 }
 
 function cleanErrorsMessages() {
-  errorMesage = [];
-  return errorMesage;
+  errorMesages = [];
+  return errorMesages;
 }
 
 function validateHashtagsInput(value) {
   if (value) {
     const hashtagsArray = value.trim().split(/\s+/);
 
-    const allHashtagsRegularValid = hashtagsArray.every((hashTag) => hashtagsRegular.test(hashTag));
+    const allHashtagsRegularValid = hashtagsArray.every((hashTag) => HASHTAG_REGEX.test(hashTag));
     const noDuplicateHashtags = hasDuplicateHashtags(hashtagsArray);
     const maxHashtagsValid = hashtagsArray.length <= MAX_HASHTAGS;
 
@@ -42,7 +42,7 @@ function validateHashtagsInput(value) {
 
     hashtagsValidationErrorsObj.forEach(({isValid, message})=>{
       if (!isValid) {
-        errorMesage.push(message);
+        errorMesages.push(message);
       }
     });
     return allHashtagsRegularValid && noDuplicateHashtags && maxHashtagsValid;

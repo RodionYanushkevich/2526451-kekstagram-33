@@ -1,34 +1,34 @@
 import {hashtagsInput} from'../form.js';
 
-function hashtagsFormatter(hashtTagsArray) {
-  const newArray = [];
+function hashtagsFormatter(hashtagsArray) {
+  const newHashtags = [];
 
-  for (let i = hashtTagsArray.length - 1; i >= 0; i--) {
-    if (hashtTagsArray[i].trim() === '') {
-      hashtTagsArray.splice(i, 1);
+  for (let i = hashtagsArray.length - 1; i >= 0; i--) {
+    if (hashtagsArray[i].trim() === '') {
+      hashtagsArray.splice(i, 1);
     }
   }
 
-  for (let i = 0; i < hashtTagsArray.length; i++) {
-    let newHashtag = ((hashtTagsArray[i].replace(/#/g, ' #'))).trim();
+  for (let i = 0; i < hashtagsArray.length; i++) {
+    let newHashtag = ((hashtagsArray[i].replace(/#/g, ' #'))).trim();
 
     if (newHashtag[0] !== '#') {
       newHashtag = `#${ newHashtag}`;
     }
 
     if (newHashtag.includes(' ')) {
-      const splitHashtagArray = newHashtag.split(' ');
-      splitHashtagArray.forEach((hashtag) => {
+      const splitedHashtagsArray = newHashtag.split(' ');
+      splitedHashtagsArray.forEach((hashtag) => {
         const trimmed = hashtag.trim();
-        newArray.push(trimmed);
+        newHashtags.push(trimmed);
       });
 
     } else {
-      newArray.push(newHashtag);
+      newHashtags.push(newHashtag);
     }
   }
 
-  return newArray;
+  return newHashtags;
 }
 
 hashtagsInput.addEventListener('focus', () => {
