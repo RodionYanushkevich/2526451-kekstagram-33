@@ -1,3 +1,6 @@
+import { uploadForm } from './form.js';
+import { previewImage } from './slider/slider.js';
+
 const SCALE_DIVISOR = 100;
 
 const DEFAULT_SCALE_TRANSFORM_VALUE = 1;
@@ -8,11 +11,10 @@ const SCALE_RULES = {
   minPictureSize: 0.25
 };
 
-import { uploadForm } from './form.js';
-import { previewImage } from './slider/slider.js';
 
 const scaleContainer = uploadForm.querySelector('.img-upload__scale');
 const [zoomOutBtn, scaleValueInput, zoomInBtn] = scaleContainer.children;
+
 
 scaleValueInput.value = `${DEFAULT_SCALE_TRANSFORM_VALUE * SCALE_DIVISOR}%`;
 

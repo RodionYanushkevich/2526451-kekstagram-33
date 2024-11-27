@@ -3,15 +3,15 @@ import {sendData} from'../data-fetcher.js';
 import {validateHashtagsInput,getErrorsMessages,cleanErrorsMessages} from'./validation/validation-checks.js';
 import {showErrorSuccessModal} from'./error-success-modal.js';
 import { fileChooser } from './file-chooser.js';
-const uploadForm = document.querySelector('.img-upload__form');
 
+const MAX_COMMENTS_LENGTH = 140;
+
+
+const uploadForm = document.querySelector('.img-upload__form');
 
 const hashtagsInput = uploadForm.querySelector('.text__hashtags');
 const commentsTextarea = uploadForm.querySelector('.text__description');
-
 const submitBtn = uploadForm.querySelector('.img-upload__submit');
-
-const MAX_COMMENTS_LENGTH = 140;
 
 const pristine = new Pristine(uploadForm,
   {
@@ -28,7 +28,6 @@ function defaultFormValues () {
   commentsTextarea.value = '';
   fileChooser.value = '';
 }
-
 
 function blockSubmitBtn () {
   submitBtn.disabled = true;

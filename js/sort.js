@@ -1,11 +1,12 @@
-const RANDOM_PICTURES_COUNT = 10;
-
 import {photoDataArray} from'./data-fetcher.js';
 import {generatePictures,picturesSection} from'./generate-pictures.js';
 
+const RANDOM_PICTURES_COUNT = 10;
+
+
 const formFilter = document.querySelector('.img-filters__form');
 
-const [deffaultBtn, randomBtn, popularBtn] = formFilter.children;
+const [defaultBtn, randomBtn, popularBtn] = formFilter.children;
 
 function buttonsActiveClassToggle(evt) {
   [...formFilter.children].forEach((button) => {
@@ -67,5 +68,5 @@ function showRandomPictures(evt) {
 
 
 popularBtn.addEventListener('click', showPopularPictures);
-deffaultBtn.addEventListener('click', showDeafaultPictures);
+defaultBtn.addEventListener('click', showDeafaultPictures);
 randomBtn.addEventListener('click', showRandomPictures);

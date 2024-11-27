@@ -1,11 +1,12 @@
 import {openModalWindow} from'./form-events.js';
 import {uploadForm} from'./form.js';
 
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+
+
 const fileChooser = uploadForm.querySelector('.img-upload input[type="file"]');
 const preview = uploadForm.querySelector('.img-upload__preview img');
 const thumbnailPreviews = uploadForm.querySelectorAll('.effects__preview');
-
-const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
 function fileChoose() {
   const file = fileChooser.files[0];

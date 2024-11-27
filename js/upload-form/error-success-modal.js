@@ -1,4 +1,3 @@
-
 import {isEscapeKey} from '../util.js';
 import {onDocumentKeydown} from './form-events.js';
 
