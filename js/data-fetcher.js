@@ -20,6 +20,17 @@ const photoDataPromise = fetch(`${SERVER_URL}data`,
   return response.json();
 });
 
+
+const showErrorModal = () => {
+  const errorModal = errorTemplate.cloneNode(true);
+  const errorModalSection = errorModal.children[0];
+
+  document.body.appendChild(errorModalSection);
+  setTimeout(() => {
+    document.body.lastChild.remove();
+  }, TIMEOUT_DELETE_ERROR_SECTION);
+};
+
 let photoDataArray;
 
 photoDataPromise
@@ -31,7 +42,7 @@ photoDataPromise
   })
   .catch(showErrorModal);
 
-function sendData (onSuccess, onFail, body){
+const sendData = (onSuccess, onFail, body) => {
   fetch(SERVER_URL,
     {
       method:'POST',
@@ -47,15 +58,6 @@ function sendData (onSuccess, onFail, body){
     onFail('ошибка');
   });
 
-}
+};
 
-function showErrorModal() {
-  const errorModal = errorTemplate.cloneNode(true);
-  const errorModalSection = errorModal.children[0];
-
-  document.body.appendChild(errorModalSection);
-  setTimeout(() => {
-    document.body.lastChild.remove();
-  }, TIMEOUT_DELETE_ERROR_SECTION);
-}
 export {photoDataPromise,sendData, photoDataArray};

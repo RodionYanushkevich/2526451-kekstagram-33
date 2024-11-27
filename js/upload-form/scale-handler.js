@@ -15,12 +15,22 @@ const SCALE_RULES = {
 const scaleContainer = uploadForm.querySelector('.img-upload__scale');
 const [zoomOutBtn, scaleValueInput, zoomInBtn] = scaleContainer.children;
 
-
 scaleValueInput.value = `${DEFAULT_SCALE_TRANSFORM_VALUE * SCALE_DIVISOR}%`;
 
 let formattedScaleValue = DEFAULT_SCALE_TRANSFORM_VALUE;
 
-scaleContainer.addEventListener('click', (evt) =>{
+const updateScale = () => {
+  previewImage.style.transform = `scale(${formattedScaleValue})`;
+  scaleValueInput.value = `${(formattedScaleValue * SCALE_DIVISOR)}%`;
+  scaleValueInput.setAttribute('value', scaleValueInput.value);
+};
+
+const setDefaultScaleValue = () => {
+  formattedScaleValue = DEFAULT_SCALE_TRANSFORM_VALUE;
+  updateScale();
+};
+
+scaleContainer.addEventListener('click', (evt) => {
   if (evt.target === scaleValueInput){
     return;
   }
@@ -36,14 +46,5 @@ scaleContainer.addEventListener('click', (evt) =>{
   updateScale();
 });
 
-function updateScale() {
-  previewImage.style.transform = `scale(${formattedScaleValue})`;
-  scaleValueInput.value = `${(formattedScaleValue * SCALE_DIVISOR)}%`;
-  scaleValueInput.setAttribute('value', scaleValueInput.value);
-}
 
-function setDefaultScaleValue () {
-  formattedScaleValue = DEFAULT_SCALE_TRANSFORM_VALUE;
-  updateScale();
-}
 export { setDefaultScaleValue };

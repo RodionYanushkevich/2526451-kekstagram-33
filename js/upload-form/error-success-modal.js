@@ -1,24 +1,15 @@
 import {isEscapeKey} from '../util.js';
 import {onDocumentKeydown} from './form-events.js';
 
-function closeAllertModal() {
-  document.removeEventListener('keydown', onErrorSuccessModalKeydown);
-
-  if (!document.body.lastChild.classList.contains('success')) {
-    document.addEventListener('keydown', onDocumentKeydown);
-  }
-  document.body.lastChild.remove();
-}
-
-function onErrorSuccessModalKeydown (evt) {
+const onErrorSuccessModalKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
 
     closeAllertModal();
   }
-}
+};
 
-function getWindow(sentDataStatus) {
+const getWindow = (sentDataStatus) => {
   const allertTemplate = document.querySelector(sentDataStatus).content.cloneNode(true);
 
   const [allertSection] = allertTemplate.children;
@@ -31,9 +22,9 @@ function getWindow(sentDataStatus) {
     }
   });
   return allertSection;
-}
+};
 
-function showErrorSuccessModal (status) {
+const showErrorSuccessModal = (status) => {
   const allertSection = getWindow(status);
 
   document.body.appendChild(allertSection);
@@ -44,6 +35,14 @@ function showErrorSuccessModal (status) {
 
   document.removeEventListener('keydown', onDocumentKeydown);
   document.addEventListener('keydown', onErrorSuccessModalKeydown);
+};
+
+function closeAllertModal () {
+  document.removeEventListener('keydown', onErrorSuccessModalKeydown);
+  if (!document.body.lastChild.classList.contains('success')) {
+    document.addEventListener('keydown', onDocumentKeydown);
+  }
+  document.body.lastChild.remove();
 }
 
 export { showErrorSuccessModal };

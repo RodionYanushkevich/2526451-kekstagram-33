@@ -18,14 +18,14 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
-function stopFormEscKeyDownEvent (evt) {
+const stopFormEscKeyDownEvent = (evt) => {
   if (isEscapeKey(evt)) {
     evt.target.blur();
     evt.stopPropagation();
   }
-}
+};
 
-function openModalWindow () {
+const openModalWindow = () => {
   compensateOverflowPadding(true);
 
   uploadOverlay.classList.remove('hidden');
@@ -35,9 +35,9 @@ function openModalWindow () {
   document.addEventListener('keydown', onDocumentKeydown);
   inpustArea.addEventListener('keydown', stopFormEscKeyDownEvent);
   createSlider();
-  setDefaultScaleValue();
 
-}
+  setDefaultScaleValue();
+};
 
 function closeModalWindow () {
   compensateOverflowPadding(false);

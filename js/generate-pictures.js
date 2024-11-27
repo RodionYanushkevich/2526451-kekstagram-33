@@ -3,7 +3,7 @@ const picturesSection = document.querySelector('.pictures');
 
 const pictureContainer = document.createDocumentFragment();
 
-function generatePictures (photoDataArray) {
+const generatePictures = (photoDataArray) => {
   photoDataArray.forEach((picture) => {
     const newPicture = pictureTemplate.cloneNode(true);
 
@@ -17,6 +17,6 @@ function generatePictures (photoDataArray) {
     pictureContainer.appendChild(newPicture);
   });
   picturesSection.appendChild(pictureContainer);
-}
+};
 
-export {picturesSection,generatePictures};
+export { picturesSection, generatePictures };

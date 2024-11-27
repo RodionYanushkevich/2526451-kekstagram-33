@@ -23,21 +23,21 @@ const pristine = new Pristine(uploadForm,
   }, false
 );
 
-function defaultFormValues () {
+const defaultFormValues = () => {
   hashtagsInput.value = '';
   commentsTextarea.value = '';
   fileChooser.value = '';
-}
+};
 
-function blockSubmitBtn () {
+const blockSubmitBtn = () => {
   submitBtn.disabled = true;
   submitBtn.textContent = 'Публикуем...';
-}
+};
 
-function unblockSubmitBtn () {
+const unblockSubmitBtn = () => {
   submitBtn.disabled = false;
   submitBtn.textContent = 'Опубликовать';
-}
+};
 
 pristine.addValidator(hashtagsInput, validateHashtagsInput, getErrorsMessages);
 
@@ -45,7 +45,7 @@ pristine.addValidator(commentsTextarea, (value) =>
   value.length < MAX_COMMENTS_LENGTH,
 'Длина комментария больше 140 символов');
 
-function setUserFormSubmit (closeModalWindow) {
+const setUserFormSubmit = (closeModalWindow) => {
   uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
@@ -74,6 +74,6 @@ function setUserFormSubmit (closeModalWindow) {
   }
   );
 
-}
+};
 
 export {defaultFormValues, setUserFormSubmit, uploadForm, hashtagsInput,commentsTextarea};

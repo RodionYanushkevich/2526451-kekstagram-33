@@ -1,6 +1,6 @@
 import { isEscapeKey,compensateOverflowPadding } from '../util.js';
-import {picturesSection} from '../generate-pictures.js';
 
+import {picturesSection} from '../generate-pictures.js';
 import {generateComments } from './generate-comments-template.js';
 import { hideCommentsOnLoadBigPicture,showNextComments , getCommentShownCount, INITIAL_COMMENTS_TO_SHOW} from './comments-functions.js';
 
@@ -18,25 +18,23 @@ const pictureDescription = bigPictureWindow.querySelector('.social__caption');
 const commentsLoader = bigPictureWindow.querySelector('.comments-loader');
 const commentInput = bigPictureWindow.querySelector('.social__footer-text');
 
+const getCommentsList = () => bigPictureWindow.querySelectorAll('.social__comment');
+
+const blockBigPictureEscEvent = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.target.blur();
+    evt.stopPropagation();
+  }
+};
+
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     closeBigPictureWindow();
   }
 };
-function blockBigPictureEscEvent (evt){
-  if (isEscapeKey(evt)) {
-    evt.target.blur();
-    evt.stopPropagation();
-  }
-}
 
-
-function getCommentsList () {
-  return bigPictureWindow.querySelectorAll('.social__comment');
-}
-
-function openBigPictureWindow () {
+const openBigPictureWindow = () => {
   compensateOverflowPadding(true);
 
   bigPictureWindow.classList.remove('hidden');
@@ -45,38 +43,18 @@ function openBigPictureWindow () {
   document.addEventListener('keydown', onDocumentKeydown);
   commentInput.addEventListener('keydown',blockBigPictureEscEvent);
   commentsLoader.addEventListener ('click', showNextComments);
-}
+};
 
-function closeBigPictureWindow () {
-  compensateOverflowPadding(false);
-
-  bigPictureWindow.classList.add('hidden');
-  document.body.classList.remove('modal-open');
-
-  document.removeEventListener('keydown', onDocumentKeydown);
-  commentsLoader.removeEventListener ('click', showNextComments);
-  commentInput.removeEventListener('keydown',blockBigPictureEscEvent);
-
-  commentInput.value = '';
-}
-
-function hideCommentsLoader (commentsList) {
+const hideCommentsLoader = (commentsList) => {
   if (commentsList.length <= INITIAL_COMMENTS_TO_SHOW) {
     commentsLoader.classList.add('hidden');
   } else if (commentsLoader.classList.contains('hidden')) {
     commentsLoader.classList.remove('hidden');
   }
-}
+};
 
-function removeListner () {
-  picturesSection.removeEventListener('click', onPictureClick);
-}
 
-function addListner () {
-  picturesSection.addEventListener('click', onPictureClick);
-}
-
-function onPictureClick (evt) {
+const onPictureClick = (evt) => {
   if (evt.target.nodeName === 'IMG') {
     const target = evt.target.parentElement;
 
@@ -100,6 +78,27 @@ function onPictureClick (evt) {
     getCommentShownCount(commentsList);
     hideCommentsLoader(commentsList);
   }
+};
+
+const removeListner = () => {
+  picturesSection.removeEventListener('click', onPictureClick);
+};
+
+const addListner = () => {
+  picturesSection.addEventListener('click', onPictureClick);
+};
+
+
+function closeBigPictureWindow () {
+  compensateOverflowPadding(false);
+  bigPictureWindow.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+
+  document.removeEventListener('keydown', onDocumentKeydown);
+  commentsLoader.removeEventListener('click', showNextComments);
+  commentInput.removeEventListener('keydown', blockBigPictureEscEvent);
+
+  commentInput.value = '';
 }
 
 bigPictureWindowCloseBtn.addEventListener('click', closeBigPictureWindow);

@@ -1,6 +1,9 @@
 import {uploadForm} from'../form.js';
 import {EFFECTS} from'./slider-effects.js';
 
+const DEFAULT_STEP = 0.1;
+
+
 const slider = uploadForm.querySelector('.effect-level__slider');
 const sliderValue = uploadForm.querySelector('.effect-level__value');
 
@@ -11,9 +14,7 @@ const uploadPreview = uploadForm.querySelector('.img-upload__preview');
 
 const [previewImage] = uploadPreview.children;
 
-const DEFAULT_STEP = 0.1;
-
-function createSlider() {
+const createSlider = () => {
   sliderContainer.classList.add('hidden');
   noUiSlider.create(slider, {
     range: {
@@ -34,15 +35,26 @@ function createSlider() {
       },
     },
   });
-}
+};
 
-function sliderToValue (target){
+const sliderToValue = (target) => {
   sliderValue.value = slider.noUiSlider.get();
   previewImage.style.filter = EFFECTS[target].effect(sliderValue.value);
-}
+};
+
+const defaultSliderValue = () => {
+  slider.noUiSlider.destroy();
+  previewImage.style.removeProperty('filter');
+  uploadForm.querySelector('#effect-none').checked = true;
+};
 
 effectsContainer.addEventListener('change', (evt) => {
   const effectTarget = evt.target.value;
+
+  const sliderUpdate = () => {
+    sliderToValue(effectTarget);
+  };
+
   slider.noUiSlider.off('update', sliderUpdate);
 
   if(evt.target.value === 'none') {
@@ -55,23 +67,14 @@ effectsContainer.addEventListener('change', (evt) => {
   }
   previewImage.style.filter = EFFECTS[effectTarget].effect(EFFECTS[effectTarget].range.max);
 
-  function sliderUpdate() {
-    sliderToValue(effectTarget);
-  }
 
   slider.noUiSlider.updateOptions({
     range: EFFECTS[effectTarget].range,
     start: EFFECTS[effectTarget].range.max,
     step: (effectTarget !== 'marvin') ? DEFAULT_STEP : EFFECTS[effectTarget].step,
   });
+
   slider.noUiSlider.on('update', sliderUpdate);
 });
-
-function defaultSliderValue (){
-  slider.noUiSlider.destroy();
-  previewImage.style.removeProperty('filter');
-  uploadForm.querySelector('#effect-none').checked = true;
-}
-
 
 export {createSlider,slider,sliderValue,previewImage ,defaultSliderValue};

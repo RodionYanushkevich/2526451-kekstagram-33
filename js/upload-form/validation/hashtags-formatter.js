@@ -1,6 +1,6 @@
 import {hashtagsInput} from'../form.js';
 
-function hashtagsFormatter(hashtagsArray) {
+const hashtagsFormatter = (hashtagsArray) => {
   const newHashtags = [];
 
   for (let i = hashtagsArray.length - 1; i >= 0; i--) {
@@ -29,7 +29,7 @@ function hashtagsFormatter(hashtagsArray) {
   }
 
   return newHashtags;
-}
+};
 
 hashtagsInput.addEventListener('focus', () => {
   if (hashtagsInput.value === '') {

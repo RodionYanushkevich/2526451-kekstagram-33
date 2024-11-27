@@ -8,7 +8,7 @@ const formFilter = document.querySelector('.img-filters__form');
 
 const [defaultBtn, randomBtn, popularBtn] = formFilter.children;
 
-function buttonsActiveClassToggle(evt) {
+const buttonsActiveClassToggle = (evt) => {
   [...formFilter.children].forEach((button) => {
     if (evt.target !== button) {
       button.classList.remove('img-filters__button--active');
@@ -16,29 +16,27 @@ function buttonsActiveClassToggle(evt) {
       button.classList.add('img-filters__button--active');
     }
   });
-}
+};
 
-function shuffle(array) {
+const shuffle = (array) => {
   const shuffledArray = array.slice();
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
   }
   return shuffledArray.slice(0,RANDOM_PICTURES_COUNT);
-}
+};
 
-function sortByCommentCount (a,b) {
-  return b.comments.length - a.comments.length;
-}
+const sortByCommentCount = (a,b) => b.comments.length - a.comments.length;
 
-function debounce (callback, timeoutDelay = 500) {
+const debounce = (callback, timeoutDelay = 500) => {
   let timeoutId;
   return (...rest) => {
     clearTimeout(timeoutId);
 
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
-}
+};
 
 const deboucedGeneratePictures = debounce((array) => {
   const picturesImg = picturesSection.querySelectorAll('.picture');
@@ -46,25 +44,25 @@ const deboucedGeneratePictures = debounce((array) => {
   generatePictures(array);
 });
 
-function showDeafaultPictures(evt) {
+const showDeafaultPictures = (evt) => {
   buttonsActiveClassToggle(evt);
 
   deboucedGeneratePictures(photoDataArray);
-}
+};
 
-function showPopularPictures(evt) {
+const showPopularPictures = (evt) => {
   buttonsActiveClassToggle(evt);
   const mostPopularItems = photoDataArray.slice();
 
   deboucedGeneratePictures(mostPopularItems.sort(sortByCommentCount));
-}
+};
 
-function showRandomPictures(evt) {
+const showRandomPictures = (evt) => {
   buttonsActiveClassToggle(evt);
 
   const shuffledArray = shuffle(photoDataArray);
   deboucedGeneratePictures(shuffledArray);
-}
+};
 
 
 popularBtn.addEventListener('click', showPopularPictures);

@@ -4,11 +4,10 @@ const newCommentArea = document.querySelector('.social__comments');
 
 const commentContainer = document.createDocumentFragment();
 
-function generateComments (pictureSrc) {
+const generateComments = (pictureSrc) => {
   newCommentArea.innerHTML = '';
 
   const formattedPath = pictureSrc.substring(pictureSrc.indexOf('photos/'));
-
 
   const pictureData = photoDataArray.find((imgUrl) => imgUrl.url === formattedPath);
 
@@ -33,6 +32,6 @@ function generateComments (pictureSrc) {
   });
 
   newCommentArea.appendChild(commentContainer);
-}
+};
 
-export { generateComments};
+export { generateComments };

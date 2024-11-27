@@ -5,6 +5,7 @@ const ChromeEffect = {
     max: 1,
   }
 };
+
 const SepiaEffect = {
   effect:(value) => `sepia(${value})`,
   range: {
