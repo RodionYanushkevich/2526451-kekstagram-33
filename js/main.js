@@ -19,5 +19,3 @@ import './upload-form/slider/slider-effects.js';
 
 import './upload-form/validation/hashtags-formatter.js';
 import './upload-form/validation/validation-checks.js';
-
-

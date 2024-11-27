@@ -11,7 +11,6 @@ const SCALE_RULES = {
   minPictureSize: 0.25
 };
 
-
 const scaleContainer = uploadForm.querySelector('.img-upload__scale');
 const [zoomOutBtn, scaleValueInput, zoomInBtn] = scaleContainer.children;
 
